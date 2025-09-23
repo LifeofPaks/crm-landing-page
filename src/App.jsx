@@ -9,6 +9,7 @@
 // import DemoSection from "./components/DemoSection";
 // import Footer from "./components/Footer";
 // import ScrollToTop from "./components/ScrollToTop";
+import BuildGrowSection from "./components/BuildGrowSection";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import ProductsSection from "./components/ProductsSection";
@@ -21,7 +22,7 @@ function App() {
         <div className="pattern-square"></div>
         <HeroSection />
         <ProductsSection />
-        {/* <BuildGrowSection /> */}
+        <BuildGrowSection />
         {/* <WhyUsSection /> */}
         {/* <SecuritySection /> */}
         {/* <HowItWorksSection /> */}

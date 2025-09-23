@@ -22,13 +22,13 @@ const Header = () => {
               alt=""
             />
           </a>
-          <button
+          {/* <button
             className="navbar-toggler offcanvas-nav-btn"
             type="button"
             onClick={toggleOffcanvas}
           >
             <i className="bi bi-list"></i>
-          </button>
+          </button> */}
           <div
             className={`offcanvas offcanvas-start offcanvas-nav ${
               isOffcanvasOpen ? "show" : ""
