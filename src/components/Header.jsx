@@ -6,12 +6,11 @@ const Header = () => {
       <nav className="navbar navbar-expand-lg navbar-light w-100">
         <div className="container px-3">
           {/* Brand */}
-          <a className="navbar-brand" href="./index.html">
-            <img
-              src="./src/assets/images/logo/microagentailogo.svg"
-              className="w-[200px]"
-              alt="Microagent AI Logo"
-            />
+          <a
+            className="navbar-brand font-extrabold !text-[20px]"
+            href="./index.html"
+          >
+            MicroAgentAi
           </a>
 
           {/* Toggler */}
@@ -34,12 +33,11 @@ const Header = () => {
             style={{ width: "20rem" }}
           >
             <div className="offcanvas-header">
-              <a href="./index.html" className="text-inverse">
-                <img
-                  src="./src/assets/images/logo/microagentailogo.svg"
-                  className="w-[200px]"
-                  alt="Microagent AI Logo"
-                />
+              <a
+                className="navbar-brand font-extrabold !text-[20px]"
+                href="./index.html"
+              >
+                MicroAgentAi
               </a>
               <button
                 type="button"
