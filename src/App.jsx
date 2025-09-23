@@ -1,17 +1,8 @@
 
-// import ProductsSection from "./components/ProductsSection";
-// import BuildGrowSection from "./components/BuildGrowSection";
-// import WhyUsSection from "./components/WhyUsSection";
-// import SecuritySection from "./components/SecuritySection";
-// import HowItWorksSection from "./components/HowItWorksSection";
-// import PricingSection from "./components/PricingSection";
-// import FAQSection from "./components/FAQSection";
-// import DemoSection from "./components/DemoSection";
-// import Footer from "./components/Footer";
-// import ScrollToTop from "./components/ScrollToTop";
 import BuildGrowSection from "./components/BuildGrowSection";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
+import HowItWorksSection from "./components/HowItWorksSection";
 import ProductsSection from "./components/ProductsSection";
 import SecuritySection from "./components/SecuritySection";
 import WhyUsSection from "./components/WhyUsSection";
@@ -27,7 +18,7 @@ function App() {
         <BuildGrowSection />
         <WhyUsSection />
         <SecuritySection />
-        {/* <HowItWorksSection /> */}
+        <HowItWorksSection/>
         {/* <PricingSection /> */}
         {/* <FAQSection /> */}
         {/* <DemoSection /> */}
