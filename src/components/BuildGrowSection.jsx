@@ -3,16 +3,20 @@ const BuildGrowSection = () => {
     <>
       <div className="pattern-square"></div>
 
-      <section className="pt-lg-7 pt-5" data-cue="fadeIn">
+      <section className="pt-lg-7 pt-5"
+    //    data-cue="fadeIn"
+      >
         <div className="container">
           <div className="row align-items-center justify-content-lg-start justify-content-center flex-lg-nowrap">
             <div
               className="col-lg-5 col-12"
-              data-cues="slideInDown"
-              data-group="page-title"
-              data-delay="700"
+            //   data-cues="slideInDown"
+            //   data-group="page-title"
+            //   data-delay="700"
             >
-              <div className="text-center text-lg-start" data-cue="zoomIn">
+              <div className="text-center text-lg-start" 
+            //   data-cue="zoomIn"
+              >
                 <div className="mb-5">
                   <span className="badge align-items-center p-2 pe-3 ps-3 fs-6 text-primary border border-primary-subtle rounded-pill mb-4">
                     Central dashboard to track and manage
@@ -28,9 +32,9 @@ const BuildGrowSection = () => {
                   </p>
                 </div>
                 <div
-                  data-cues="slideInDown"
-                  data-group="page-title-buttons"
-                  data-delay="800"
+                //   data-cues="slideInDown"
+                //   data-group="page-title-buttons"
+                //   data-delay="800"
                 >
                   <a href="#demo" className="btn btn-primary">
                     Request a demo
@@ -38,24 +42,26 @@ const BuildGrowSection = () => {
                 </div>
                 <div
                   className="d-flex flex-wrap gap-4 my-6"
-                  data-cues="slideInDown"
-                  data-group="page-title-buttons"
-                  data-delay="900"
+                //   data-cues="slideInDown"
+                //   data-group="page-title-buttons"
+                //   data-delay="900"
                 ></div>
               </div>
             </div>
             <div
               className="col-xxl-7 offset-xxl-1 col-lg-7 col-12 mt-5 mt-lg-0"
-              data-cue="fadeIn"
-              data-delay="1000"
+            //   data-cue="fadeIn"
+            //   data-delay="1000"
             >
               <div className="position-relative">
                 <div
                   className="bg-light-subtle p-md-4 p-2 rounded-4 border scene"
-                  data-relative-input="true"
+                //   data-relative-input="true"
                 >
                   <div data-depth="0.09">
-                    <figure data-cues="zoomIn" data-delay="900">
+                    <figure 
+                    // data-cues="zoomIn" data-delay="900"
+                    >
                       <img
                         src="./src/assets/images/landings/saas/hero-img.jpg"
                         alt="landing"

@@ -13,6 +13,8 @@ import BuildGrowSection from "./components/BuildGrowSection";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import ProductsSection from "./components/ProductsSection";
+import SecuritySection from "./components/SecuritySection";
+import WhyUsSection from "./components/WhyUsSection";
 
 function App() {
   return (
@@ -23,8 +25,8 @@ function App() {
         <HeroSection />
         <ProductsSection />
         <BuildGrowSection />
-        {/* <WhyUsSection /> */}
-        {/* <SecuritySection /> */}
+        <WhyUsSection />
+        <SecuritySection />
         {/* <HowItWorksSection /> */}
         {/* <PricingSection /> */}
         {/* <FAQSection /> */}
