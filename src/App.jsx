@@ -1,10 +1,36 @@
 
+// import ProductsSection from "./components/ProductsSection";
+// import BuildGrowSection from "./components/BuildGrowSection";
+// import WhyUsSection from "./components/WhyUsSection";
+// import SecuritySection from "./components/SecuritySection";
+// import HowItWorksSection from "./components/HowItWorksSection";
+// import PricingSection from "./components/PricingSection";
+// import FAQSection from "./components/FAQSection";
+// import DemoSection from "./components/DemoSection";
+// import Footer from "./components/Footer";
+// import ScrollToTop from "./components/ScrollToTop";
+import Header from "./components/Header";
 
 function App() {
-
   return (
-    <h1 className="text-red-600">Hello Paks</h1>
-  )
+    <div className="App" data-bs-theme="dark">
+      <Header />
+      <main>
+        <div className="pattern-square"></div>
+        {/* <HeroSection /> */}
+        {/* <ProductsSection />
+        <BuildGrowSection />
+        <WhyUsSection />
+        <SecuritySection />
+        <HowItWorksSection />
+        <PricingSection />
+        <FAQSection />
+        <DemoSection /> */}
+      </main>
+      {/* <Footer />
+      <ScrollToTop /> */}
+    </div>
+  );
 }
 
-export default App
+export default App;
