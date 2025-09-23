@@ -100,13 +100,13 @@ const FAQSection = () => {
 
       <section
         className="py-xl-9 pb-md-8 pt-lg-8 pb-lg-10 py-5"
-        //   data-cue="fadeIn"
+          data-cue="fadeIn"
       >
         <div className="container">
           <div className="row">
             <div
               className="col-lg-5 col-12"
-              //   data-cue="zoomIn"
+                data-cue="zoomIn"
             >
               <div className="mb-7 mb-md-0 me-lg-7 text-md-center text-lg-start">
                 <div className="mb-4">
@@ -128,7 +128,7 @@ const FAQSection = () => {
             </div>
             <div
               className="col-lg-7 col-12"
-              //   data-cue="zoomIn"
+                data-cue="zoomIn"
             >
               <div className="accordion" id="accordionExample">
                 {faqs.map((faq, index) => (
