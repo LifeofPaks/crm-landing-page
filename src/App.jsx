@@ -10,6 +10,8 @@
 // import Footer from "./components/Footer";
 // import ScrollToTop from "./components/ScrollToTop";
 import Header from "./components/Header";
+import HeroSection from "./components/HeroSection";
+import ProductsSection from "./components/ProductsSection";
 
 function App() {
   return (
@@ -17,15 +19,15 @@ function App() {
       <Header />
       <main>
         <div className="pattern-square"></div>
-        {/* <HeroSection /> */}
-        {/* <ProductsSection />
-        <BuildGrowSection />
-        <WhyUsSection />
-        <SecuritySection />
-        <HowItWorksSection />
-        <PricingSection />
-        <FAQSection />
-        <DemoSection /> */}
+        <HeroSection />
+        <ProductsSection />
+        {/* <BuildGrowSection /> */}
+        {/* <WhyUsSection /> */}
+        {/* <SecuritySection /> */}
+        {/* <HowItWorksSection /> */}
+        {/* <PricingSection /> */}
+        {/* <FAQSection /> */}
+        {/* <DemoSection /> */}
       </main>
       {/* <Footer />
       <ScrollToTop /> */}
