@@ -2,6 +2,7 @@
 import BuildGrowSection from "./components/BuildGrowSection";
 import DemoSection from "./components/DemoSection";
 import FAQSection from "./components/FAQSection";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import HowItWorksSection from "./components/HowItWorksSection";
@@ -26,8 +27,8 @@ function App() {
         <FAQSection />
         <DemoSection />
       </main>
-      {/* <Footer />
-      <ScrollToTop /> */}
+      <Footer />
+      {/* <ScrollToTop /> */}
     </div>
   );
 }
