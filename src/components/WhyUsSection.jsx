@@ -24,7 +24,7 @@ const WhyUsSection = () => {
 
       <section
         className="py-xl-9 py-6"
-        //   data-cue="fadeIn"
+          data-cue="fadeIn"
       >
         <div className="container">
           <div className="row mb-6">
@@ -54,7 +54,7 @@ const WhyUsSection = () => {
               <div
                 key={index}
                 className="col-lg-4 col-md-6"
-                // data-cue="zoomIn"
+                data-cue="zoomIn"
               >
                 <div className="d-flex flex-column gap-5 p-xxl-6 text-center p-3 card card-lift">
                   <div className="d-flex justify-content-center">
