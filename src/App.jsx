@@ -8,6 +8,7 @@ import HeroSection from "./components/HeroSection";
 import HowItWorksSection from "./components/HowItWorksSection";
 import PricingSection from "./components/PricingSection";
 import ProductsSection from "./components/ProductsSection";
+import ScrollToTop from "./components/ScrollToTop";
 import SecuritySection from "./components/SecuritySection";
 import WhyUsSection from "./components/WhyUsSection";
 
@@ -28,7 +29,7 @@ function App() {
         <DemoSection />
       </main>
       <Footer />
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
     </div>
   );
 }
