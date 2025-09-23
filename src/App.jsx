@@ -1,5 +1,6 @@
 
 import BuildGrowSection from "./components/BuildGrowSection";
+import DemoSection from "./components/DemoSection";
 import FAQSection from "./components/FAQSection";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
@@ -23,7 +24,7 @@ function App() {
         <HowItWorksSection/>
         <PricingSection />
         <FAQSection />
-        {/* <DemoSection /> */}
+        <DemoSection />
       </main>
       {/* <Footer />
       <ScrollToTop /> */}
