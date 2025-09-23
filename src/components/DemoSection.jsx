@@ -63,7 +63,7 @@ const DemoSection = () => {
 
       <section
         id="demo"
-        //   data-cue="fadeIn"
+          data-cue="fadeIn"
         className="py-lg-9 py-md-8 py-5"
         style={{
           background: "url(./src/assets/images/ai-studio/cta-glows.png) no-repeat",
@@ -77,7 +77,7 @@ const DemoSection = () => {
               <div className="d-flex flex-column gap-6">
                 <div
                   className="text-center d-flex flex-column gap-2"
-                  // data-cue="zoomOut"
+                  data-cue="zoomOut"
                 >
                   <h2 className="mb-0 display-6">Ready to see it in action?</h2>
                   <p className="mb-0 px-xl-5 lead">
