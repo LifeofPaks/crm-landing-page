@@ -30,7 +30,7 @@ const HowItWorksSection = () => {
         <section
           id="work"
           className="py-xl-9 py-lg-7 py-5"
-          // data-cue="fadeIn"
+          data-cue="fadeIn"
         >
           <div className="container">
             <div className="row">
@@ -48,8 +48,8 @@ const HowItWorksSection = () => {
                 <div
                   key={index}
                   className="col-lg-4 col-md-6 col-12"
-                  //   data-cue="fadeIn"
-                  //   data-duration={step.duration}
+                    data-cue="fadeIn"
+                    data-duration={step.duration}
                 >
                   <div className="d-flex flex-column gap-6 p-xxl-6 p-md-4 text-center">
                     <div className="line">
