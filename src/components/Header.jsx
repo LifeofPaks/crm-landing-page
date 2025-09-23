@@ -1,55 +1,54 @@
 import { useState } from "react";
 
 const Header = () => {
-  const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
-
-  const toggleOffcanvas = () => {
-    setIsOffcanvasOpen(!isOffcanvasOpen);
-  };
-
-  const closeOffcanvas = () => {
-    setIsOffcanvasOpen(false);
-  };
-
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-light w-100">
         <div className="container px-3">
+          {/* Brand */}
           <a className="navbar-brand" href="./index.html">
             <img
-              src="./src//assets/images/logo/microagentailogo.svg"
+              src="./src/assets/images/logo/microagentailogo.svg"
               className="w-[200px]"
-              alt=""
+              alt="Microagent AI Logo"
             />
           </a>
-          {/* <button
+
+          {/* Toggler */}
+          <button
             className="navbar-toggler offcanvas-nav-btn"
             type="button"
-            onClick={toggleOffcanvas}
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNav"
+            aria-controls="offcanvasNav"
           >
             <i className="bi bi-list"></i>
-          </button> */}
+          </button>
+
+          {/* Offcanvas */}
           <div
-            className={`offcanvas offcanvas-start offcanvas-nav ${
-              isOffcanvasOpen ? "show" : ""
-            }`}
+            className="offcanvas offcanvas-start offcanvas-nav"
+            tabIndex="-1"
+            id="offcanvasNav"
+            aria-labelledby="offcanvasNavLabel"
             style={{ width: "20rem" }}
           >
             <div className="offcanvas-header">
               <a href="./index.html" className="text-inverse">
                 <img
-                  src="./assets/images/logo/microagentailogo.svg"
-                  height="20"
-                  alt=""
+                  src="./src/assets/images/logo/microagentailogo.svg"
+                  className="w-[200px]"
+                  alt="Microagent AI Logo"
                 />
               </a>
               <button
                 type="button"
                 className="btn-close"
-                onClick={closeOffcanvas}
+                data-bs-dismiss="offcanvas"
                 aria-label="Close"
               ></button>
             </div>
+
             <div className="offcanvas-body pt-0 align-items-center">
               <ul className="navbar-nav mx-auto align-items-lg-center">
                 <li>
@@ -78,6 +77,7 @@ const Header = () => {
                   </a>
                 </li>
               </ul>
+
               <div className="mt-3 mt-lg-0 d-flex align-items-center">
                 <a href="./#demo" className="btn btn-primary">
                   Request a Demo
