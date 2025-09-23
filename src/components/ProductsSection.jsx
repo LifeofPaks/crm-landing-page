@@ -396,7 +396,7 @@ const ProductsSection = () => {
     if (typeof window !== "undefined" && window.scrollCue) {
       window.scrollCue.init({
         duration: 700, // ms
-        interval: 800, // stagger children
+        interval: 100, // stagger children
         percentage: 0.85, // trigger when element is 85% visible
       });
     }
@@ -433,7 +433,7 @@ const ProductsSection = () => {
       status: "(Coming Soon)",
       description:
         "Create personalized learning that adapts to each student's pace and style. Education technology that makes teaching impactful and learning more engaging.",
-      delay: "100",
+      delay: "400",
     },
     {
       icon: "bg-info-gradient",
@@ -441,7 +441,7 @@ const ProductsSection = () => {
       status: "(Coming Soon)",
       description:
         "Get real-time visibility into team productivity with AI-powered analytics and insights. The smarter way to build high-performing teams without micromanaging.",
-      delay: "200",
+      delay: "500",
     },
     {
       icon: "bg-success-gradient",
@@ -449,7 +449,7 @@ const ProductsSection = () => {
       status: "(Coming Soon)",
       description:
         "Master any certification with AI practice questions that adapt to your knowledge gaps. Your personal AI tutor that guarantees you're ready for exam day.",
-      delay: "300",
+      delay: "600",
     },
   ];
 
