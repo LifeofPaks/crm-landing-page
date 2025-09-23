@@ -65,7 +65,7 @@ const CrossIcon = () => (
 const PricingCard = ({ plan, isPopular = false, cueDirection }) => (
   <div
     className="col-xl-4 col-md-6 col-12"
-    //   data-cue={cueDirection}
+      data-cue={cueDirection}
   >
     <div
       className={`card ${
@@ -179,7 +179,7 @@ const PricingSection = () => {
       <section
         id="pricing"
         className="py-xl-9 py-lg-7 py-5"
-        // data-cue="fadeIn"
+        data-cue="fadeIn"
       >
         <div className="container pb-xl-5">
           <div className="row">
