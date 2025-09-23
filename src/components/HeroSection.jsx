@@ -68,6 +68,7 @@ const HeroSection = () => {
         position: "relative",
         overflow: "hidden",
       }}
+      data-cue="fadeIn"
     >
       <canvas
         id="starCanvas"
@@ -85,7 +86,10 @@ const HeroSection = () => {
       >
         <div className="row py-xl-4">
           <div className="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 col-12">
-            <div className="text-center d-flex flex-column gap-6">
+            <div
+              className="text-center d-flex flex-column gap-6"
+              data-cue="zoomIn"
+            >
               <div className="d-flex flex-column gap-3">
                 <h1 className="display-5 mb-0">
                   <span className="gradient-text">
