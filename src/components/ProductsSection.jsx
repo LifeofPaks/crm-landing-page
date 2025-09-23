@@ -1,8 +1,11 @@
+import { useEffect } from "react";
+
 const ProductCard = ({ icon, title, description, delay }) => (
+  
   <div
     className="col-lg-4 col-md-6 col-12"
-    // data-cue="fadeIn"
-    // data-cue-delay={delay}
+    data-cue="fadeIn"
+    data-cue-delay={delay}
   >
     <a href="#!">
       <div className="card border-gradient bg-transparent">
@@ -190,6 +193,14 @@ const ProductCard = ({ icon, title, description, delay }) => (
 );
 
 const ProductsSection = () => {
+  useEffect(() => {
+    scrollCue.init({
+      duration: 700, // ms
+      interval: 800, // stagger children
+      percentage: 0.85, // trigger when element is 85% visible
+    });
+  }, []);
+
   const products = [
     {
       icon: "bg-pink-gradient",
@@ -197,7 +208,7 @@ const ProductsSection = () => {
       status: "(Available Now)",
       description:
         "Turn clicks into customers with automated lead tracking and AI-powered follow-ups. Perfect for growing businesses who want more sales without more admin.",
-      delay: "100",
+      delay: "0",
     },
     {
       icon: "bg-info-gradient",
@@ -213,7 +224,7 @@ const ProductsSection = () => {
       status: "(Coming Soon)",
       description:
         "Deploy intelligent chat assistants in seconds that learn your business instantly. The smartest way to deliver 24/7 support that customers actually love.",
-      delay: "300",
+      delay: "400",
     },
     {
       icon: "bg-pink-gradient",
@@ -221,7 +232,7 @@ const ProductsSection = () => {
       status: "(Coming Soon)",
       description:
         "Create personalized learning that adapts to each student's pace and style. Education technology that makes teaching impactful and learning more engaging.",
-      delay: "100",
+      delay: "600",
     },
     {
       icon: "bg-info-gradient",
@@ -229,7 +240,7 @@ const ProductsSection = () => {
       status: "(Coming Soon)",
       description:
         "Get real-time visibility into team productivity with AI-powered analytics and insights. The smarter way to build high-performing teams without micromanaging.",
-      delay: "200",
+      delay: "800",
     },
     {
       icon: "bg-success-gradient",
@@ -237,7 +248,7 @@ const ProductsSection = () => {
       status: "(Coming Soon)",
       description:
         "Master any certification with AI practice questions that adapt to your knowledge gaps. Your personal AI tutor that guarantees you're ready for exam day.",
-      delay: "300",
+      delay: "1000",
     },
   ];
 
@@ -247,7 +258,7 @@ const ProductsSection = () => {
       <section
         id="product"
         className="py-xl-9 pb-lg-9 pt-5 pb-6"
-        // data-cue="fadeIn"
+        data-cue="fadeIn"
       >
         <div className="container">
           <div className="row">
