@@ -3,7 +3,7 @@ const BuildGrowSection = () => {
     <>
       <div className="pattern-square"></div>
 
-      <section className="pt-lg-7 pt-5"
+      <section className="pt-lg-7 pt-5 overflow-x-hidden"
     //    data-cue="fadeIn"
       >
         <div className="container">
