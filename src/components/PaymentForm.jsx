@@ -147,7 +147,7 @@ const PaymentForm = ({ selectedPlan }) => {
                   onChange={handleInputChange}
                   required
                 >
-                  {[1, 2, 3, 4, 5].map((num) => (
+                  {[1, 2, 3, 4, 5, 6,7,8,9,10].map((num) => (
                     <option key={num} value={num}>
                       {num}
                     </option>
