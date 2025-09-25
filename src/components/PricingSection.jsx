@@ -284,7 +284,9 @@ const PricingSection = () => {
           </div>
         </div>
       </section>
-      {showPaymentModal && <PaymentForm selectedPlan={selectedPlan} />}
+      {showPaymentModal && (
+        <PaymentForm selectedPlan={selectedPlan} currency={currency} />
+      )}
     </>
   );
 };

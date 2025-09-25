@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import usePaymentStore from "../store/PaymentStore";
 
-const PaymentForm = ({ selectedPlan }) => {
+const PaymentForm = ({ selectedPlan, currency }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -122,15 +122,13 @@ const PaymentForm = ({ selectedPlan }) => {
                 type="hidden"
                 name="retURL"
                 value="https://microagent.services"
-                          />
-                          <div className="col-12">
-                              
-
-              <div className="form-control">
-                <strong>Selected Plan:</strong> {selectedPlan?.name} –{" "}
-                {selectedPlan?.priceLabel} {selectedPlan?.period}
+              />
+              <div className="col-12">
+                <div className="form-control">
+                  <strong>Selected Plan:</strong> {selectedPlan?.name} –{" "}
+                  {selectedPlan?.priceLabel} {selectedPlan?.period}
+                </div>
               </div>
-                          </div>
 
               {/* Number of Licenses dropdown */}
               <div className="col-12">
@@ -147,7 +145,7 @@ const PaymentForm = ({ selectedPlan }) => {
                   onChange={handleInputChange}
                   required
                 >
-                  {[1, 2, 3, 4, 5, 6,7,8,9,10].map((num) => (
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                     <option key={num} value={num}>
                       {num}
                     </option>
