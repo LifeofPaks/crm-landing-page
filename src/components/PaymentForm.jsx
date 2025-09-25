@@ -266,7 +266,7 @@ const PaymentForm = ({ selectedPlan }) => {
                     Number of Licenses<span className="text-danger">*</span>
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     className={`form-control ${
                       errors.licence ? "is-invalid" : ""
                     }`}
