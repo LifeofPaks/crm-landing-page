@@ -19,6 +19,8 @@ const PaymentForm = ({ selectedPlan, currency }) => {
 
   const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
   const closePaymentModal = usePaymentStore((s) => s.closePaymentModal);
+  const paymentSuccess = usePaymentStore((s) => s.paymentSuccess);
+  const closePaymentSuccess = usePaymentStore((s) => s.closePaymentSuccess);
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -70,6 +72,8 @@ const PaymentForm = ({ selectedPlan, currency }) => {
       }
 
       const data = await res.json();
+      paymentSuccess()
+      closePaymentModal()
 
       if (data?.url) {
         // Redirect user to Stripe Checkout
