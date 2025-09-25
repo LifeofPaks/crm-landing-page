@@ -8,7 +8,7 @@ const PaymentForm = () => {
     lastName: "",
     email: "",
     mobile: "",
-    jobTitle: "",
+    licence: "",
     company: "",
     country: "",
     agreeTerms: false,
@@ -46,7 +46,7 @@ const PaymentForm = () => {
       newErrors.lastName = "Please enter last name.";
     if (!formData.email.trim()) newErrors.email = "Please enter email.";
     if (!formData.mobile.trim()) newErrors.mobile = "Please enter phone.";
-    if (!formData.jobTitle) newErrors.jobTitle = "Please select job title.";
+    if (!formData.licence) newErrors.licence = "Please select job title.";
     if (!formData.country) newErrors.country = "Please select country.";
     if (!formData.agreeTerms)
       newErrors.agreeTerms = "You must agree before submitting.";
@@ -108,7 +108,7 @@ const PaymentForm = () => {
             onMouseDown={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h5 className="modal-title">Schedule a free estimate call</h5>
+              <h5 className="modal-title">Join MicroAgentAI</h5>
               <button
                 type="button"
                 className="btn-close"
@@ -118,11 +118,11 @@ const PaymentForm = () => {
             </div>
 
             <div className="modal-body">
-              <p className="mb-3">
-                Schedule a short 20-min discovery call and get a look inside the
-                way we design, develop and scale websites.
-              </p>
-
+              {/* <p className="mb-3">
+                Become part of the MicroAgentAI community. Sign up to explore
+                our AI-powered tools, streamline your workflows, and unlock
+                smarter automation for your business.
+              </p> */}
               <form
                 className="row g-3 needs-validation"
                 noValidate
@@ -225,7 +225,7 @@ const PaymentForm = () => {
                 </div>
 
                 {/* 2-column layout: jobTitle + company */}
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                   <label htmlFor="jobTitle" className="form-label">
                     Job Title <span className="text-danger">*</span>
                   </label>
@@ -254,6 +254,26 @@ const PaymentForm = () => {
                   </select>
                   {errors.jobTitle && (
                     <div className="invalid-feedback">{errors.jobTitle}</div>
+                  )}
+                </div> */}
+                <div className="col-md-6">
+                  <label htmlFor="mobile" className="form-label">
+                    Number of Licenses<span className="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className={`form-control ${
+                      errors.licence ? "is-invalid" : ""
+                    }`}
+                    id="licence"
+                    name="licence"
+                    maxLength="40"
+                    value={formData.licence}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  {errors.licence && (
+                    <div className="invalid-feedback">{errors.licence}</div>
                   )}
                 </div>
 
