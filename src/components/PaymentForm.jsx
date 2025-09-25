@@ -6,18 +6,21 @@ const PaymentForm = ({ selectedPlan, currency }) => {
     firstName: "",
     lastName: "",
     email: "",
-    mobile: "",
-    noOfUsers: "1", 
+    phone: "",
+    noOfUsers: 1,
     currency: currency || "USD",
     subscription: selectedPlan ? selectedPlan.key : "",
+    // businessName: "Paks Global",
   });
-  
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const modalRef = useRef(null);
 
   const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
   const closePaymentModal = usePaymentStore((s) => s.closePaymentModal);
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -36,25 +39,49 @@ const PaymentForm = ({ selectedPlan, currency }) => {
 
   const validateForm = () => {
     const newErrors = {};
-
     if (!formData.firstName.trim())
       newErrors.firstName = "Please enter first name.";
     if (!formData.lastName.trim())
       newErrors.lastName = "Please enter last name.";
     if (!formData.email.trim()) newErrors.email = "Please enter email.";
-    if (!formData.mobile.trim()) newErrors.mobile = "Please enter phone.";
+    if (!formData.phone.trim()) newErrors.phone = "Please enter phone.";
     if (!formData.noOfUsers)
       newErrors.noOfUsers = "Please select number of licenses.";
-
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      e.target.submit();
+    if (!validateForm()) return;
+
+    try {
+      setLoading(true);
+
+      const res = await fetch(`${API_BASE_URL}/stripe-checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to start checkout");
+      }
+
+      const data = await res.json();
+
+      if (data?.checkoutUrl) {
+        // Redirect user to Stripe Checkout
+        window.location.href = data.checkoutUrl;
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("Checkout failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -112,16 +139,8 @@ const PaymentForm = ({ selectedPlan, currency }) => {
             <form
               className="row g-3 needs-validation"
               noValidate
-              action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D8c000004uWvt"
-              method="POST"
               onSubmit={handleSubmit}
             >
-              <input type="hidden" name="oid" value="00D8c000004uWvt" />
-              <input
-                type="hidden"
-                name="retURL"
-                value="https://microagent.services"
-              />
               <div className="col-12">
                 <div className="form-control">
                   <strong>Selected Plan:</strong> {selectedPlan?.name} –{" "}
@@ -129,7 +148,7 @@ const PaymentForm = ({ selectedPlan, currency }) => {
                 </div>
               </div>
 
-              {/* Number of Licenses dropdown */}
+              {/* Number of Licenses */}
               <div className="col-12">
                 <label htmlFor="noOfUsers" className="form-label">
                   Number of Licenses <span className="text-danger">*</span>
@@ -218,58 +237,32 @@ const PaymentForm = ({ selectedPlan, currency }) => {
 
               {/* Phone */}
               <div className="col-12">
-                <label htmlFor="mobile" className="form-label">
+                <label htmlFor="phone" className="form-label">
                   Phone Number <span className="text-danger">*</span>
                 </label>
                 <input
                   type="tel"
                   className={`form-control ${
-                    errors.mobile ? "is-invalid" : ""
+                    errors.phone ? "is-invalid" : ""
                   }`}
-                  id="mobile"
-                  name="mobile"
-                  value={formData.mobile}
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
                   onChange={handleInputChange}
                   required
                 />
-                {errors.mobile && (
-                  <div className="invalid-feedback">{errors.mobile}</div>
+                {errors.phone && (
+                  <div className="invalid-feedback">{errors.phone}</div>
                 )}
               </div>
 
-              {/* Country */}
-              {/* <div className="col-12">
-                <label htmlFor="country" className="form-label">
-                  Country <span className="text-danger">*</span>
-                </label>
-                <select
-                  className={`form-select ${
-                    errors.country ? "is-invalid" : ""
-                  }`}
-                  id="country"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="">Country</option>
-                  <option value="Africa">Africa</option>
-                  <option value="North America">North America</option>
-                  <option value="South America">South America</option>
-                  <option value="Europe">
-                    Europe, United Kingdom & Australia
-                  </option>
-                  <option value="Asia">Asia, West Indies & Caribbean</option>
-                  <option value="Others">Others</option>
-                </select>
-                {errors.country && (
-                  <div className="invalid-feedback">{errors.country}</div>
-                )}
-              </div> */}
-
               <div className="d-grid">
-                <button className="btn btn-primary" type="submit">
-                  Continue with Stripe
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  disabled={loading}
+                >
+                  {loading ? "Processing..." : "Continue with Stripe"}
                 </button>
               </div>
             </form>
