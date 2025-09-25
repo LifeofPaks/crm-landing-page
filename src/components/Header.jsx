@@ -10,7 +10,7 @@ const Header = () => {
             className="navbar-brand font-extrabold !text-[20px]"
             href="./index.html"
           >
-            MicroAgentAi
+            MicroAgent
           </a>
 
           {/* Toggler */}
@@ -37,7 +37,7 @@ const Header = () => {
                 className="navbar-brand font-extrabold !text-[20px]"
                 href="./index.html"
               >
-                MicroAgentAi
+                MicroAgent
               </a>
               <button
                 type="button"

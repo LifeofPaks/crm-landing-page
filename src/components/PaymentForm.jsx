@@ -100,7 +100,7 @@ const PaymentForm = ({ selectedPlan }) => {
           onMouseDown={(e) => e.stopPropagation()}
         >
           <div className="modal-header">
-            <h2 className="modal-title w-full text-center">Join MicroAgentAI</h2>
+            <h2 className="modal-title w-full text-center">Join MicroAgent</h2>
             <button
               type="button"
               className="btn-close"

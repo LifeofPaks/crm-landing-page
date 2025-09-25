@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="small mb-3 mb-lg-0 text-lg-center">
               Copyright © 2025{" "}
               <span className="text-primary">
-                <a href="#">MicroAgent AI</a>
+                <a href="#">MicroAgent</a>
               </span>{" "}
               | Powered by{" "}
               <span className="text-primary">
