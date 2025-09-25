@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import usePaymentStore from "../store/PaymentStore";
+import { notifyError } from "../utils/Toastify";
 
 const PaymentForm = ({ selectedPlan, currency }) => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,6 @@ const PaymentForm = ({ selectedPlan, currency }) => {
     noOfUsers: 1,
     currency: currency || "USD",
     subscription: selectedPlan ? selectedPlan.key : "",
-    // businessName: "Paks Global",
   });
 
   const [errors, setErrors] = useState({});
@@ -75,11 +75,11 @@ const PaymentForm = ({ selectedPlan, currency }) => {
         // Redirect user to Stripe Checkout
         window.location.href = data.checkoutUrl;
       } else {
-        alert("Something went wrong. Please try again.");
+        notifyError("Something went wrong. Please try again.");
       }
     } catch (err) {
       console.error("Checkout error:", err);
-      alert("Checkout failed. Please try again.");
+      notifyError("Checkout failed. Please try again.");
     } finally {
       setLoading(false);
     }
