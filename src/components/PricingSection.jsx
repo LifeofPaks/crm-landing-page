@@ -10,7 +10,7 @@ const getSymbol = (currency) => {
     case "NGN":
       return "₦";
     case "CAD":
-      return "C$";
+      return "CA $";
     default:
       return "$";
   }
@@ -109,7 +109,7 @@ const PricingCard = ({ plan, isPopular, cueDirection, openPaymentModal }) => (
             <p className="mb-0">{plan.description}</p>
           </div>
           <div className="d-flex flex-row align-items-center gap-2">
-            <h3 className="fs-1 fw-bold mb-0">{plan.priceLabel}</h3>
+            <h3 className="fs-2 fw-bold mb-0">{plan.priceLabel}</h3>
             <span>{plan.period}</span>
           </div>
           <ul className="list-unstyled mb-0 d-flex flex-column gap-2">
