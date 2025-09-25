@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+// Adjust the path below to where your zustand file actually lives
+import usePaymentStore from "../store/usePaymentStore";
 
 const PaymentForm = () => {
   const [formData, setFormData] = useState({
@@ -13,8 +15,12 @@ const PaymentForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef(null);
+
+  // Zustand-controlled modal state & actions
+  const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
+  const openPaymentModal = usePaymentStore((s) => s.openPaymentModal);
+  const closePaymentModal = usePaymentStore((s) => s.closePaymentModal);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -59,30 +65,26 @@ const PaymentForm = () => {
     }
   };
 
-  // open/close modal helpers
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
-
-  // close on Escape and click outside
+  // Close on Escape (uses store close action)
   useEffect(() => {
     const onKey = (ev) => {
-      if (ev.key === "Escape") closeModal();
+      if (ev.key === "Escape" && showPaymentModal) closePaymentModal();
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, []);
+  }, [showPaymentModal, closePaymentModal]);
 
+  // disable body scroll when modal open
   useEffect(() => {
-    // disable body scroll when modal open
-    document.body.style.overflow = isOpen ? "hidden" : "";
+    document.body.style.overflow = showPaymentModal ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [showPaymentModal]);
 
   const onBackdropClick = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
-      closeModal();
+      closePaymentModal();
     }
   };
 
@@ -159,7 +161,7 @@ const PaymentForm = () => {
                                 type="button"
                                 className="btn-close"
                                 aria-label="Close"
-                                onClick={closeModal}
+                                onClick={closePaymentModal}
                               />
                             </div>
 
@@ -433,7 +435,7 @@ const PaymentForm = () => {
                                     className="btn btn-primary"
                                     type="submit"
                                   >
-                                   Continue with stripe
+                                    Continue with stripe
                                   </button>
                                 </div>
                               </form>
