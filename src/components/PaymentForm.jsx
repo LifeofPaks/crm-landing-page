@@ -20,7 +20,7 @@ const PaymentForm = ({ selectedPlan, currency }) => {
   const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
   const closePaymentModal = usePaymentStore((s) => s.closePaymentModal);
   const openPaymentSuccess = usePaymentStore((s) => s.openPaymentSuccess);
-  const closePaymentSuccess = usePaymentStore((s) => s.closePaymentSuccess);
+  const setStripeUrl = usePaymentStore((s) => s.setStripeUrl);
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -71,16 +71,16 @@ const PaymentForm = ({ selectedPlan, currency }) => {
         throw new Error("Failed to start checkout");
       }
 
-      const data = await res.json();
-      openPaymentSuccess();
-      closePaymentModal()
+   const data = await res.json();
 
-      // if (data?.url) {
-      //   // Redirect user to Stripe Checkout
-      //   window.location.href = data.url;
-      // } else {
-      //   notifyError("Something went wrong. Please try again.");
-      // }
+   if (data?.url) {
+     setStripeUrl(data.url); 
+     openPaymentSuccess();
+     closePaymentModal();
+   } else {
+     notifyError("Something went wrong. Failed to redirect to Stripe.");
+   }
+
     } catch (err) {
       console.error("Checkout error:", err);
       notifyError("Checkout failed. Please try again.");
