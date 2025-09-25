@@ -9,7 +9,7 @@ const PaymentForm = ({ selectedPlan }) => {
     email: "",
     mobile: "",
     licence: "",
-    company: "",
+    businessName: "",
     country: "",
     agreeTerms: false,
   });
@@ -327,7 +327,7 @@ const PaymentForm = ({ selectedPlan }) => {
                   )}
                 </div>
 
-                <div className="col-md-12">
+                {/* <div className="col-md-12">
                   <div className="form-check">
                     <input
                       className={`form-check-input ${
@@ -354,7 +354,7 @@ const PaymentForm = ({ selectedPlan }) => {
                       </div>
                     )}
                   </div>
-                </div>
+                </div> */}
 
                 <div className="d-grid">
                   <button className="btn btn-primary" type="submit">
