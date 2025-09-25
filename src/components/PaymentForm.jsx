@@ -19,7 +19,7 @@ const PaymentForm = ({ selectedPlan, currency }) => {
 
   const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
   const closePaymentModal = usePaymentStore((s) => s.closePaymentModal);
-  const paymentSuccess = usePaymentStore((s) => s.paymentSuccess);
+  const openPaymentSuccess = usePaymentStore((s) => s.openPaymentSuccess);
   const closePaymentSuccess = usePaymentStore((s) => s.closePaymentSuccess);
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -28,7 +28,7 @@ const PaymentForm = ({ selectedPlan, currency }) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: name === "noOfUsers" ? Number(value) : value,
     }));
 
     if (errors[name]) {
@@ -72,15 +72,15 @@ const PaymentForm = ({ selectedPlan, currency }) => {
       }
 
       const data = await res.json();
-      paymentSuccess()
+      openPaymentSuccess();
       closePaymentModal()
 
-      if (data?.url) {
-        // Redirect user to Stripe Checkout
-        // window.location.href = data.url;
-      } else {
-        notifyError("Something went wrong. Please try again.");
-      }
+      // if (data?.url) {
+      //   // Redirect user to Stripe Checkout
+      //   window.location.href = data.url;
+      // } else {
+      //   notifyError("Something went wrong. Please try again.");
+      // }
     } catch (err) {
       console.error("Checkout error:", err);
       notifyError("Checkout failed. Please try again.");

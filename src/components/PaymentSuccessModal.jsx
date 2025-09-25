@@ -77,16 +77,11 @@ const PaymentSuccessModal = () => {
 
           <div className="modal-body">
             <SuccessIcon />
-            <h4 className="mb-2 text-success">Payment Successful!</h4>
+            <h4 className="mb-2 ">Payment Successful!</h4>
             <p className="text-muted">
-              Thank you for your purchase. Your subscription is now active.
+              We're redirecting you to single login to complete your onboarding.
             </p>
-            <button
-              className="btn btn-success mt-3"
-              onClick={closePaymentSuccess}
-            >
-              Continue
-            </button>
+         
           </div>
         </div>
       </div>
