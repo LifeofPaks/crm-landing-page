@@ -7,9 +7,8 @@ const PaymentForm = ({ selectedPlan, currency }) => {
     lastName: "",
     email: "",
     mobile: "",
-    licence: "1", // default value is 1
+    licence: "1", 
     country: "",
-    agreeTerms: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -44,9 +43,7 @@ const PaymentForm = ({ selectedPlan, currency }) => {
     if (!formData.mobile.trim()) newErrors.mobile = "Please enter phone.";
     if (!formData.licence)
       newErrors.licence = "Please select number of licenses.";
-    if (!formData.country) newErrors.country = "Please select country.";
-    if (!formData.agreeTerms)
-      newErrors.agreeTerms = "You must agree before submitting.";
+
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
