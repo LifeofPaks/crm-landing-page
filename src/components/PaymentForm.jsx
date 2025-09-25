@@ -100,7 +100,7 @@ const PaymentForm = () => {
         <div
           className="modal-dialog modal-lg modal-dialog-centered"
           role="document"
-          style={{ maxWidth: 920 }}
+          style={{ maxWidth: 680 }}
         >
           <div
             className="modal-content shadow-lg"
