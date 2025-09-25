@@ -1,6 +1,22 @@
+import { useEffect, useState } from "react";
 import usePaymentStore from "../store/PaymentStore";
 import PaymentForm from "./PaymentForm";
 
+// --- Currency symbol ---
+const getSymbol = (currency) => {
+  switch (currency) {
+    case "USD":
+      return "$";
+    case "NGN":
+      return "₦";
+    case "CAD":
+      return "C$";
+    default:
+      return "$";
+  }
+};
+
+// --- Icons ---
 const CheckIcon = () => (
   <svg
     width="20"
@@ -65,12 +81,8 @@ const CrossIcon = () => (
   </svg>
 );
 
-const PricingCard = ({
-  plan,
-  isPopular = false,
-  cueDirection,
-  openPaymentModal,
-}) => (
+// --- PricingCard ---
+const PricingCard = ({ plan, isPopular, cueDirection, openPaymentModal }) => (
   <div className="col-xl-4 col-md-6 col-12" data-cue={cueDirection}>
     <div
       className={`card ${
@@ -113,84 +125,134 @@ const PricingCard = ({
           </ul>
         </div>
         <div onClick={() => openPaymentModal(plan)}>
-          <a
-            // href="#demo"
-            className="btn btn-primary"
-          >
-            Start Free Trial
-          </a>
+          <a className="btn btn-primary">Start Free Trial</a>
         </div>
       </div>
     </div>
   </div>
 );
 
+// --- Section ---
 const PricingSection = () => {
   const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
   const openPaymentModal = usePaymentStore((s) => s.openPaymentModal);
-   const selectedPlan = usePaymentStore((s) => s.selectedPlan);
-const plans = [
-  {
-    name: "Starter",
-    description: "Basic access to essential AI tools",
-    price: 10, // raw number for backend
-    period: "per month",
-    priceLabel: "$10/user", // for UI
-    features: [
-      { name: "MicroAgent CRM", included: true },
-      { name: "MicroAgent Chat Bot", included: true },
-      { name: "MicroAgent Voice Facilitator", included: false },
-      { name: "Bespoke Agentic Actions", included: true },
-      { name: "Limited Tokens for Agentic Actions", included: true },
-      { name: "AI Only Support Agents", included: true },
-      { name: "Custom Agent Actions & Integration", included: false },
-      { name: "Custom Domain & LLM Hosting", included: false },
-      { name: "Multitenancy & Whitelabel Solutions", included: false },
-    ],
-  },
-  {
-    name: "Standard",
-    description: "Advanced features for growing business",
-    price: 20,
-    period: "per month",
-    priceLabel: "$20/user",
-    features: [
-      { name: "MicroAgent CRM", included: true },
-      { name: "MicroAgent Chat Bot", included: true },
-      { name: "MicroAgent Voice Facilitator", included: true },
-      { name: "Bespoke Agentic Actions", included: true },
-      { name: "10x more tokens than starter", included: true },
-      { name: "AI + Dedicated Human Support", included: true },
-      { name: "Custom Agent Actions & Integration", included: false },
-      { name: "Custom Domain & LLM Hosting", included: false },
-      { name: "Multitenancy & Whitelabel Solutions", included: false },
-    ],
-  },
-  {
-    name: "Enterprise",
-    description: "Custom solutions for established businesses",
-    price: 0, // keep 0 or null since it's custom
-    period: "pricing",
-    priceLabel: "Custom pricing",
-    features: [
-      { name: "MicroAgent CRM", included: true },
-      { name: "MicroAgent Chat Bot", included: true },
-      { name: "MicroAgent Voice Facilitator", included: true },
-      { name: "Bespoke Agentic Actions", included: true },
-      { name: "20x more tokens than starter", included: true },
-      { name: "AI + Dedicated Human Support", included: true },
-      { name: "Custom Agent Actions & Integration", included: true },
-      { name: "Custom Domain & LLM Hosting", included: true },
-      { name: "Multitenancy & Whitelabel Solutions", included: true },
-    ],
-  },
-];
+  const selectedPlan = usePaymentStore((s) => s.selectedPlan);
 
+  const [currency, setCurrency] = useState("USD");
+
+  // --- Mock API response for prices ---
+  const prices = {
+    starter: {
+      usd: 10,
+      cad: 13.77,
+      ngn: 15560, // fixed your sample (comma was typo)
+    },
+    standard: {
+      usd: 20,
+      cad: 27.54,
+      ngn: 31120,
+    },
+    enterprise: {
+      usd: null, // custom pricing
+      cad: null,
+      ngn: null,
+    },
+  };
+
+  useEffect(() => {
+    const detectLocation = async () => {
+      try {
+        const res = await fetch("https://ipapi.co/json/");
+        const data = await res.json();
+        if (data.country_code === "NG") {
+          setCurrency("NGN");
+        } else if (data.country_code === "CA") {
+          setCurrency("CAD");
+        } else {
+          setCurrency("USD");
+        }
+      } catch (err) {
+        console.error("Location detection failed, defaulting to USD");
+        setCurrency("USD");
+      }
+    };
+    detectLocation();
+  }, []);
+
+  const plans = [
+    {
+      key: "starter",
+      name: "Starter",
+      description: "Basic access to essential AI tools",
+      period: "per month",
+      features: [
+        { name: "MicroAgent CRM", included: true },
+        { name: "MicroAgent Chat Bot", included: true },
+        { name: "MicroAgent Voice Facilitator", included: false },
+        { name: "Bespoke Agentic Actions", included: true },
+        { name: "Limited Tokens for Agentic Actions", included: true },
+        { name: "AI Only Support Agents", included: true },
+        { name: "Custom Agent Actions & Integration", included: false },
+        { name: "Custom Domain & LLM Hosting", included: false },
+        { name: "Multitenancy & Whitelabel Solutions", included: false },
+      ],
+    },
+    {
+      key: "standard",
+      name: "Standard",
+      description: "Advanced features for growing business",
+      period: "per month",
+      features: [
+        { name: "MicroAgent CRM", included: true },
+        { name: "MicroAgent Chat Bot", included: true },
+        { name: "MicroAgent Voice Facilitator", included: true },
+        { name: "Bespoke Agentic Actions", included: true },
+        { name: "10x more tokens than starter", included: true },
+        { name: "AI + Dedicated Human Support", included: true },
+        { name: "Custom Agent Actions & Integration", included: false },
+        { name: "Custom Domain & LLM Hosting", included: false },
+        { name: "Multitenancy & Whitelabel Solutions", included: false },
+      ],
+    },
+    {
+      key: "enterprise",
+      name: "Enterprise",
+      description: "Custom solutions for established businesses",
+      period: "pricing",
+      features: [
+        { name: "MicroAgent CRM", included: true },
+        { name: "MicroAgent Chat Bot", included: true },
+        { name: "MicroAgent Voice Facilitator", included: true },
+        { name: "Bespoke Agentic Actions", included: true },
+        { name: "20x more tokens than starter", included: true },
+        { name: "AI + Dedicated Human Support", included: true },
+        { name: "Custom Agent Actions & Integration", included: true },
+        { name: "Custom Domain & LLM Hosting", included: true },
+        { name: "Multitenancy & Whitelabel Solutions", included: true },
+      ],
+    },
+  ];
+
+  // Attach pricing to plans
+  const enrichedPlans = plans.map((p) => {
+    const priceData = prices[p.key];
+    let priceLabel = "Custom";
+
+    if (priceData && priceData[currency.toLowerCase()]) {
+      priceLabel = `${getSymbol(currency)}${priceData[
+        currency.toLowerCase()
+      ].toLocaleString()}/user`;
+    }
+
+    return {
+      ...p,
+      priceLabel,
+      currency,
+    };
+  });
 
   return (
     <>
-      <div className="pattern-square"></div>
-
       <section id="pricing" className="py-xl-9 py-lg-7 py-5" data-cue="fadeIn">
         <div className="container pb-xl-5">
           <div className="row">
@@ -206,7 +268,7 @@ const plans = [
             </div>
           </div>
           <div className="row gy-5 gy-xl-0">
-            {plans.map((plan, i) => (
+            {enrichedPlans.map((plan, i) => (
               <PricingCard
                 key={i}
                 plan={plan}
@@ -214,7 +276,9 @@ const plans = [
                 cueDirection={
                   i === 0 ? "slideInLeft" : i === 1 ? "zoomOut" : "slideInRight"
                 }
-                openPaymentModal={openPaymentModal} // 
+                openPaymentModal={(plan) =>
+                  openPaymentModal({ ...plan, currency })
+                }
               />
             ))}
           </div>
