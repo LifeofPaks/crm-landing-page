@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import usePaymentStore from "../store/PaymentStore";
 // Adjust the path below to where your zustand file actually lives
 
-const PaymentForm = () => {
+const PaymentForm = ({ selectedPlan }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -137,6 +137,11 @@ const PaymentForm = () => {
                   name="retURL"
                   value="https://microagent.services"
                 />
+
+                <div className="form-control">
+                  <strong>Selected Plan:</strong> {selectedPlan?.name} –{" "}
+                  {selectedPlan?.priceLabel} {selectedPlan?.period}
+                </div>
 
                 {/* 2-column layout: first + last */}
                 <div className="col-md-6">

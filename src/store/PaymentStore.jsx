@@ -1,11 +1,11 @@
-import create  from "zustand";
+import  create  from "zustand";
 
 const usePaymentStore = create((set) => ({
   showPaymentModal: false,
-  openPaymentModal: () => set({ showPaymentModal: true }),
-  closePaymentModal: () => set({ showPaymentModal: false }),
-  togglePaymentModal: () =>
-    set((state) => ({ showPaymentModal: !state.showPaymentModal })),
+  selectedPlan: null,
+  openPaymentModal: (plan) =>
+    set({ showPaymentModal: true, selectedPlan: plan }),
+  closePaymentModal: () => set({ showPaymentModal: false, selectedPlan: null }),
 }));
 
 export default usePaymentStore;

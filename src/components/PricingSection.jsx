@@ -97,7 +97,7 @@ const PricingCard = ({
             <p className="mb-0">{plan.description}</p>
           </div>
           <div className="d-flex flex-row align-items-center gap-2">
-            <h3 className="fs-1 fw-bold mb-0">{plan.price}</h3>
+            <h3 className="fs-1 fw-bold mb-0">{plan.priceLabel}</h3>
             <span>{plan.period}</span>
           </div>
           <ul className="list-unstyled mb-0 d-flex flex-column gap-2">
@@ -112,7 +112,7 @@ const PricingCard = ({
             ))}
           </ul>
         </div>
-        <div onClick={openPaymentModal}>
+        <div onClick={() => openPaymentModal(plan)}>
           <a
             // href="#demo"
             className="btn btn-primary"
@@ -128,59 +128,64 @@ const PricingCard = ({
 const PricingSection = () => {
   const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
   const openPaymentModal = usePaymentStore((s) => s.openPaymentModal);
-  const plans = [
-    {
-      name: "Starter",
-      description: "Basic access to essential AI tools",
-      price: "$10/user",
-      period: "per month",
-      features: [
-        { name: "MicroAgent CRM", included: true },
-        { name: "MicroAgent Chat Bot", included: true },
-        { name: "MicroAgent Voice Facilitator", included: false },
-        { name: "Bespoke Agentic Actions", included: true },
-        { name: "Limited Tokens for Agentic Actions", included: true },
-        { name: "AI Only Support Agents", included: true },
-        { name: "Custom Agent Actions & Integration", included: false },
-        { name: "Custom Domain & LLM Hosting", included: false },
-        { name: "Multitenancy & Whitelabel Solutions", included: false },
-      ],
-    },
-    {
-      name: "Standard",
-      description: "Advanced features for growing business",
-      price: "$20/user",
-      period: "per month",
-      features: [
-        { name: "MicroAgent CRM", included: true },
-        { name: "MicroAgent Chat Bot", included: true },
-        { name: "MicroAgent Voice Facilitator", included: true },
-        { name: "Bespoke Agentic Actions", included: true },
-        { name: "10x more tokens than starter", included: true },
-        { name: "AI + Dedicated Human Support", included: true },
-        { name: "Custom Agent Actions & Integration", included: false },
-        { name: "Custom Domain & LLM Hosting", included: false },
-        { name: "Multitenancy & Whitelabel Solutions", included: false },
-      ],
-    },
-    {
-      name: "Enterprise",
-      description: "Custom solutions for established businesses",
-      price: "Custom",
-      period: "pricing",
-      features: [
-        { name: "MicroAgent CRM", included: true },
-        { name: "MicroAgent Chat Bot", included: true },
-        { name: "MicroAgent Voice Facilitator", included: true },
-        { name: "Bespoke Agentic Actions", included: true },
-        { name: "20x more tokens than starter", included: true },
-        { name: "AI + Dedicated Human Support", included: true },
-        { name: "Custom Agent Actions & Integration", included: true },
-        { name: "Custom Domain & LLM Hosting", included: true },
-        { name: "Multitenancy & Whitelabel Solutions", included: true },
-      ],
-    },
-  ];
+   const selectedPlan = usePaymentStore((s) => s.selectedPlan);
+const plans = [
+  {
+    name: "Starter",
+    description: "Basic access to essential AI tools",
+    price: 10, // raw number for backend
+    period: "per month",
+    priceLabel: "$10/user", // for UI
+    features: [
+      { name: "MicroAgent CRM", included: true },
+      { name: "MicroAgent Chat Bot", included: true },
+      { name: "MicroAgent Voice Facilitator", included: false },
+      { name: "Bespoke Agentic Actions", included: true },
+      { name: "Limited Tokens for Agentic Actions", included: true },
+      { name: "AI Only Support Agents", included: true },
+      { name: "Custom Agent Actions & Integration", included: false },
+      { name: "Custom Domain & LLM Hosting", included: false },
+      { name: "Multitenancy & Whitelabel Solutions", included: false },
+    ],
+  },
+  {
+    name: "Standard",
+    description: "Advanced features for growing business",
+    price: 20,
+    period: "per month",
+    priceLabel: "$20/user",
+    features: [
+      { name: "MicroAgent CRM", included: true },
+      { name: "MicroAgent Chat Bot", included: true },
+      { name: "MicroAgent Voice Facilitator", included: true },
+      { name: "Bespoke Agentic Actions", included: true },
+      { name: "10x more tokens than starter", included: true },
+      { name: "AI + Dedicated Human Support", included: true },
+      { name: "Custom Agent Actions & Integration", included: false },
+      { name: "Custom Domain & LLM Hosting", included: false },
+      { name: "Multitenancy & Whitelabel Solutions", included: false },
+    ],
+  },
+  {
+    name: "Enterprise",
+    description: "Custom solutions for established businesses",
+    price: 0, // keep 0 or null since it's custom
+    period: "pricing",
+    priceLabel: "Custom pricing",
+    features: [
+      { name: "MicroAgent CRM", included: true },
+      { name: "MicroAgent Chat Bot", included: true },
+      { name: "MicroAgent Voice Facilitator", included: true },
+      { name: "Bespoke Agentic Actions", included: true },
+      { name: "20x more tokens than starter", included: true },
+      { name: "AI + Dedicated Human Support", included: true },
+      { name: "Custom Agent Actions & Integration", included: true },
+      { name: "Custom Domain & LLM Hosting", included: true },
+      { name: "Multitenancy & Whitelabel Solutions", included: true },
+    ],
+  },
+];
+
 
   return (
     <>
@@ -201,26 +206,21 @@ const PricingSection = () => {
             </div>
           </div>
           <div className="row gy-5 gy-xl-0">
-            <PricingCard
-              plan={plans[0]}
-              cueDirection="slideInLeft"
-              openPaymentModal={openPaymentModal}
-            />
-            <PricingCard
-              plan={plans[1]}
-              isPopular={true}
-              cueDirection="zoomOut"
-              openPaymentModal={openPaymentModal}
-            />
-            <PricingCard
-              plan={plans[2]}
-              cueDirection="slideInRight"
-              openPaymentModal={openPaymentModal}
-            />
+            {plans.map((plan, i) => (
+              <PricingCard
+                key={i}
+                plan={plan}
+                isPopular={i === 1}
+                cueDirection={
+                  i === 0 ? "slideInLeft" : i === 1 ? "zoomOut" : "slideInRight"
+                }
+                openPaymentModal={openPaymentModal} // 
+              />
+            ))}
           </div>
         </div>
       </section>
-      {showPaymentModal && <PaymentForm />}
+      {showPaymentModal && <PaymentForm selectedPlan={selectedPlan} />}
     </>
   );
 };
