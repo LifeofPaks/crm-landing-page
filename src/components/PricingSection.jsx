@@ -3,6 +3,8 @@ import usePaymentStore from "../store/PaymentStore";
 import PaymentForm from "./PaymentForm";
 import PaymentSuccessModal from "./PaymentSuccessModal";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 // --- Currency symbol ---
 const getSymbol = (currency) => {
   switch (currency) {
@@ -141,25 +143,47 @@ const PricingSection = () => {
   const selectedPlan = usePaymentStore((s) => s.selectedPlan);
 
   const [currency, setCurrency] = useState("USD");
+  const [prices, setPrices] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // --- Mock API response for prices ---
-  const prices = {
-    starter: {
-      usd: 10,
-      cad: 13.77,
-      ngn: 15560, // fixed your sample (comma was typo)
-    },
-    standard: {
-      usd: 20,
-      cad: 27.54,
-      ngn: 31120,
-    },
-    enterprise: {
-      usd: null, // custom pricing
-      cad: null,
-      ngn: null,
-    },
-  };
+  // const prices = {
+  //   starter: {
+  //     usd: 10,
+  //     cad: 13.77,
+  //     ngn: 15560, // fixed your sample (comma was typo)
+  //   },
+  //   standard: {
+  //     usd: 20,
+  //     cad: 27.54,
+  //     ngn: 31120,
+  //   },
+  //   enterprise: {
+  //     usd: null, // custom pricing
+  //     cad: null,
+  //     ngn: null,
+  //   },
+  // };
+
+  // --- Fetch Prices from API ---
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/pricing`);
+        const data = await res.json();
+        setPrices(data); // assumes API returns same structure as your hardcoded "prices"
+      } catch (err) {
+        console.error("Failed to fetch pricing:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPrices();
+  }, []);
+
+  console.log("prices", prices);
+  
 
   useEffect(() => {
     const detectLocation = async () => {
@@ -237,7 +261,7 @@ const PricingSection = () => {
 
   // Attach pricing to plans
   const enrichedPlans = plans.map((p) => {
-    const priceData = prices[p.key];
+    const priceData = prices?.[p.key];
     let priceLabel = "Custom";
 
     if (priceData && priceData[currency.toLowerCase()]) {
@@ -289,9 +313,7 @@ const PricingSection = () => {
       {showPaymentModal && (
         <PaymentForm selectedPlan={selectedPlan} currency={currency} />
       )}
-      {
-        paymentSuccess && <PaymentSuccessModal />
-      }
+      {paymentSuccess && <PaymentSuccessModal />}
     </>
   );
 };
