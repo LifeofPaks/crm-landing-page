@@ -1,3 +1,6 @@
+import usePaymentStore from "../store/PaymentStore";
+import PaymentForm from "./PaymentForm";
+
 const CheckIcon = () => (
   <svg
     width="20"
@@ -118,6 +121,8 @@ const PricingCard = ({ plan, isPopular = false, cueDirection }) => (
 );
 
 const PricingSection = () => {
+    const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
+    const openPaymentModal = usePaymentStore((s) => s.openPaymentModal);
   const plans = [
     {
       name: "Starter",
@@ -205,6 +210,7 @@ const PricingSection = () => {
           </div>
         </div>
       </section>
+      <PaymentForm/>
     </>
   );
 };
