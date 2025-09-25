@@ -7,9 +7,11 @@ const PaymentForm = ({ selectedPlan, currency }) => {
     lastName: "",
     email: "",
     mobile: "",
-    licence: "1", 
-    country: "",
+    noOfUsers: "1", 
+    currency: currency || "USD",
+    subscription: selectedPlan ? selectedPlan.key : "",
   });
+  
 
   const [errors, setErrors] = useState({});
   const modalRef = useRef(null);
@@ -41,8 +43,8 @@ const PaymentForm = ({ selectedPlan, currency }) => {
       newErrors.lastName = "Please enter last name.";
     if (!formData.email.trim()) newErrors.email = "Please enter email.";
     if (!formData.mobile.trim()) newErrors.mobile = "Please enter phone.";
-    if (!formData.licence)
-      newErrors.licence = "Please select number of licenses.";
+    if (!formData.noOfUsers)
+      newErrors.noOfUsers = "Please select number of licenses.";
 
 
     setErrors(newErrors);
@@ -129,16 +131,16 @@ const PaymentForm = ({ selectedPlan, currency }) => {
 
               {/* Number of Licenses dropdown */}
               <div className="col-12">
-                <label htmlFor="licence" className="form-label">
+                <label htmlFor="noOfUsers" className="form-label">
                   Number of Licenses <span className="text-danger">*</span>
                 </label>
                 <select
                   className={`form-select ${
-                    errors.licence ? "is-invalid" : ""
+                    errors.noOfUsers ? "is-invalid" : ""
                   }`}
-                  id="licence"
-                  name="licence"
-                  value={formData.licence}
+                  id="noOfUsers"
+                  name="noOfUsers"
+                  value={formData.noOfUsers}
                   onChange={handleInputChange}
                   required
                 >
@@ -148,8 +150,8 @@ const PaymentForm = ({ selectedPlan, currency }) => {
                     </option>
                   ))}
                 </select>
-                {errors.licence && (
-                  <div className="invalid-feedback">{errors.licence}</div>
+                {errors.noOfUsers && (
+                  <div className="invalid-feedback">{errors.noOfUsers}</div>
                 )}
               </div>
 
