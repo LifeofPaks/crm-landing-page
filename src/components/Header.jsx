@@ -70,15 +70,15 @@ const Header = () => {
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="./#demo">
+                  <a className="dropdown-item" href="./#pricing">
                     Contact Us
                   </a>
                 </li>
               </ul>
 
               <div className="mt-3 mt-lg-0 d-flex align-items-center">
-                <a href="./#demo" className="btn btn-primary">
-                  Request a Demo
+                <a href="./#pricing" className="btn btn-primary">
+                  Get Started
                 </a>
               </div>
             </div>

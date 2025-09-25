@@ -102,8 +102,8 @@ const HeroSection = () => {
                 </p>
               </div>
               <div className="d-flex flex-row gap-3 justify-content-center">
-                <a href="#demo" className="btn btn-primary">
-                  Request a Demo
+                <a href="#pricing" className="btn btn-primary">
+                  Get Started
                 </a>
               </div>
             </div>
