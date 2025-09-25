@@ -112,7 +112,7 @@ const PricingCard = ({
             ))}
           </ul>
         </div>
-        <div oncclick={openPaymentModal}>
+        <div onClick={openPaymentModal}>
           <a
             // href="#demo"
             className="btn btn-primary"
@@ -212,7 +212,11 @@ const PricingSection = () => {
               cueDirection="zoomOut"
               openPaymentModal={openPaymentModal}
             />
-            <PricingCard plan={plans[2]} cueDirection="slideInRight" />
+            <PricingCard
+              plan={plans[2]}
+              cueDirection="slideInRight"
+              openPaymentModal={openPaymentModal}
+            />
           </div>
         </div>
       </section>
