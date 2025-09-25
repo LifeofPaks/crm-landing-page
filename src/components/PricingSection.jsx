@@ -65,11 +65,13 @@ const CrossIcon = () => (
   </svg>
 );
 
-const PricingCard = ({ plan, isPopular = false, cueDirection }) => (
-  <div
-    className="col-xl-4 col-md-6 col-12"
-      data-cue={cueDirection}
-  >
+const PricingCard = ({
+  plan,
+  isPopular = false,
+  cueDirection,
+  openPaymentModal,
+}) => (
+  <div className="col-xl-4 col-md-6 col-12" data-cue={cueDirection}>
     <div
       className={`card ${
         isPopular
@@ -110,8 +112,11 @@ const PricingCard = ({ plan, isPopular = false, cueDirection }) => (
             ))}
           </ul>
         </div>
-        <div>
-          <a href="#demo" className="btn btn-primary">
+        <div oncclick={openPaymentModal}>
+          <a
+            // href="#demo"
+            className="btn btn-primary"
+          >
             Start Free Trial
           </a>
         </div>
@@ -121,8 +126,8 @@ const PricingCard = ({ plan, isPopular = false, cueDirection }) => (
 );
 
 const PricingSection = () => {
-    const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
-    const openPaymentModal = usePaymentStore((s) => s.openPaymentModal);
+  const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
+  const openPaymentModal = usePaymentStore((s) => s.openPaymentModal);
   const plans = [
     {
       name: "Starter",
@@ -181,11 +186,7 @@ const PricingSection = () => {
     <>
       <div className="pattern-square"></div>
 
-      <section
-        id="pricing"
-        className="py-xl-9 py-lg-7 py-5"
-        data-cue="fadeIn"
-      >
+      <section id="pricing" className="py-xl-9 py-lg-7 py-5" data-cue="fadeIn">
         <div className="container pb-xl-5">
           <div className="row">
             <div className="col-12">
@@ -200,17 +201,22 @@ const PricingSection = () => {
             </div>
           </div>
           <div className="row gy-5 gy-xl-0">
-            <PricingCard plan={plans[0]} cueDirection="slideInLeft" />
+            <PricingCard
+              plan={plans[0]}
+              cueDirection="slideInLeft"
+              openPaymentModal={openPaymentModal}
+            />
             <PricingCard
               plan={plans[1]}
               isPopular={true}
               cueDirection="zoomOut"
+              openPaymentModal={openPaymentModal}
             />
             <PricingCard plan={plans[2]} cueDirection="slideInRight" />
           </div>
         </div>
       </section>
-      <PaymentForm/>
+      {showPaymentModal && <PaymentForm />}
     </>
   );
 };

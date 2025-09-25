@@ -19,7 +19,6 @@ const PaymentForm = () => {
 
   // Zustand-controlled modal state & actions
   const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
-  const openPaymentModal = usePaymentStore((s) => s.openPaymentModal);
   const closePaymentModal = usePaymentStore((s) => s.closePaymentModal);
 
   const handleInputChange = (e) => {
