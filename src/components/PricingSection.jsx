@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import usePaymentStore from "../store/PaymentStore";
 import PaymentForm from "./PaymentForm";
+import PaymentSuccessModal from "./PaymentSuccessModal";
 
 // --- Currency symbol ---
 const getSymbol = (currency) => {
@@ -136,6 +137,7 @@ const PricingCard = ({ plan, isPopular, cueDirection, openPaymentModal }) => (
 const PricingSection = () => {
   const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
   const openPaymentModal = usePaymentStore((s) => s.openPaymentModal);
+  const paymentSuccess = usePaymentStore((s) => s.paymentSuccess);
   const selectedPlan = usePaymentStore((s) => s.selectedPlan);
 
   const [currency, setCurrency] = useState("USD");
@@ -287,6 +289,9 @@ const PricingSection = () => {
       {showPaymentModal && (
         <PaymentForm selectedPlan={selectedPlan} currency={currency} />
       )}
+      {
+        paymentSuccess && <PaymentSuccessModal />
+      }
     </>
   );
 };

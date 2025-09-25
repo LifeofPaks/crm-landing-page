@@ -77,7 +77,7 @@ const PaymentForm = ({ selectedPlan, currency }) => {
 
       if (data?.url) {
         // Redirect user to Stripe Checkout
-        window.location.href = data.url;
+        // window.location.href = data.url;
       } else {
         notifyError("Something went wrong. Please try again.");
       }
