@@ -20,6 +20,8 @@ const SuccessIcon = () => (
 
 const PaymentSuccessModal = () => {
   const modalRef = useRef(null);
+  const redirectUrl = usePaymentStore((s) => s.redirectUrl);
+
 
   const paymentSuccess = usePaymentStore((s) => s.paymentSuccess);
   const closePaymentSuccess = usePaymentStore((s) => s.closePaymentSuccess);

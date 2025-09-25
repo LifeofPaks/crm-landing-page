@@ -20,12 +20,12 @@ const PaymentForm = ({ selectedPlan, currency }) => {
   const showPaymentModal = usePaymentStore((s) => s.showPaymentModal);
   const closePaymentModal = usePaymentStore((s) => s.closePaymentModal);
   const openPaymentSuccess = usePaymentStore((s) => s.openPaymentSuccess);
-  const setStripeUrl = usePaymentStore((s) => s.setStripeUrl);
+  const setRedirectUrl = usePaymentStore((s) => s.setRedirectUrl);
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: name === "noOfUsers" ? Number(value) : value,
@@ -71,16 +71,14 @@ const PaymentForm = ({ selectedPlan, currency }) => {
         throw new Error("Failed to start checkout");
       }
 
-   const data = await res.json();
+      const data = await res.json();
 
-   if (data?.url) {
-     setStripeUrl(data.url); 
-     openPaymentSuccess();
-     closePaymentModal();
-   } else {
-     notifyError("Something went wrong. Failed to redirect to Stripe.");
-   }
-
+      if (data?.url) {
+        closePaymentModal();
+        window.location.href = data.url;
+      } else {
+        notifyError("Something went wrong. Failed to redirect to Stripe.");
+      }
     } catch (err) {
       console.error("Checkout error:", err);
       notifyError("Checkout failed. Please try again.");
@@ -246,9 +244,7 @@ const PaymentForm = ({ selectedPlan, currency }) => {
                 </label>
                 <input
                   type="tel"
-                  className={`form-control ${
-                    errors.phone ? "is-invalid" : ""
-                  }`}
+                  className={`form-control ${errors.phone ? "is-invalid" : ""}`}
                   id="phone"
                   name="phone"
                   value={formData.phone}

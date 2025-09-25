@@ -4,14 +4,14 @@ const usePaymentStore = create((set) => ({
   showPaymentModal: false,
   paymentSuccess: false,
   selectedPlan: null,
-  stripeUrl: null,
+  redirectUrl: null,
   openPaymentModal: (plan) =>
     set({ showPaymentModal: true, selectedPlan: plan }),
   closePaymentModal: () => set({ showPaymentModal: false, selectedPlan: null }),
   openPaymentSuccess: () => set({ paymentSuccess: true }),
   closePaymentSuccess: () => set({ paymentSuccess: false }),
-  setStripeUrl: (url) => set({ stripeUrl: url }),
-  clearStripeUrl: () => set({ stripeUrl: null }), 
+  setRedirectUrl: (url) => set({ redirectUrl: url }),
+  clearRedirectUrl: () => set({ redirectUrl: null }),
 }));
 
 export default usePaymentStore;
