@@ -26,7 +26,7 @@ function App() {
         <HowItWorksSection/>
         <PricingSection />
         <FAQSection />
-        <DemoSection />
+        {/* <DemoSection /> */}
       </main>
       <Footer />
       <ScrollToTop />
