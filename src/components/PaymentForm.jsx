@@ -24,6 +24,19 @@ const PaymentForm = ({ selectedPlan, currency }) => {
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+    useEffect(() => {
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get("session_id");
+      const success = params.get("success");
+
+      if (success === "true" && sessionId) {
+        closePaymentModal();
+        openPaymentSuccess();
+      } else if (success === "false" || (success === "true" && !sessionId)) {
+        notifyError("There was an error processing your payment.");
+      }
+    }, []);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -72,9 +85,7 @@ const PaymentForm = ({ selectedPlan, currency }) => {
       }
 
       const data = await res.json();
-
       if (data?.url) {
-        closePaymentModal();
         window.location.href = data.url;
       } else {
         notifyError("Something went wrong. Failed to redirect to Stripe.");
