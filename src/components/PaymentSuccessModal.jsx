@@ -20,11 +20,19 @@ const SuccessIcon = () => (
 
 const PaymentSuccessModal = () => {
   const modalRef = useRef(null);
-  const redirectUrl = usePaymentStore((s) => s.redirectUrl);
-
-
   const paymentSuccess = usePaymentStore((s) => s.paymentSuccess);
   const closePaymentSuccess = usePaymentStore((s) => s.closePaymentSuccess);
+  const redirectUrl = usePaymentStore((s) => s.redirectUrl);
+
+  useEffect(() => {
+    if (paymentSuccess) {
+      const timer = setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [paymentSuccess, redirectUrl]);
 
   useEffect(() => {
     const onKey = (ev) => {
@@ -56,7 +64,7 @@ const PaymentSuccessModal = () => {
       role="dialog"
       aria-modal="true"
       style={{ background: "rgba(0,0,0,0.6)" }}
-      onMouseDown={onBackdropClick}
+      // onMouseDown={onBackdropClick}
     >
       <div
         className="modal-dialog modal-lg modal-dialog-centered"
@@ -65,17 +73,17 @@ const PaymentSuccessModal = () => {
       >
         <div
           className="modal-content shadow-lg p-4 text-center"
-          ref={modalRef}
-          onMouseDown={(e) => e.stopPropagation()}
+          // ref={modalRef}
+          // onMouseDown={(e) => e.stopPropagation()}
         >
-          <div className="modal-header border-0">
+          {/* <div className="modal-header border-0">
             <button
               type="button"
               className="btn-close"
               aria-label="Close"
               onClick={closePaymentSuccess}
             />
-          </div>
+          </div> */}
 
           <div className="modal-body">
             <SuccessIcon />
@@ -83,7 +91,6 @@ const PaymentSuccessModal = () => {
             <p className="text-muted">
               We're redirecting you to single login to complete your onboarding.
             </p>
-         
           </div>
         </div>
       </div>

@@ -128,7 +128,7 @@ const PricingCard = ({ plan, isPopular, cueDirection, openPaymentModal }) => (
           </ul>
         </div>
         <div onClick={() => openPaymentModal(plan)}>
-          <a className="btn btn-primary">Start Free Trial</a>
+          <a className="btn btn-primary">Get Started</a>
         </div>
       </div>
     </div>

@@ -21,21 +21,28 @@ const PaymentForm = ({ selectedPlan, currency }) => {
   const closePaymentModal = usePaymentStore((s) => s.closePaymentModal);
   const openPaymentSuccess = usePaymentStore((s) => s.openPaymentSuccess);
   const setRedirectUrl = usePaymentStore((s) => s.setRedirectUrl);
+  const redirectUrl = usePaymentStore((s) => s.redirectUrl);
+
+  console.log("redirectUrl", redirectUrl);
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-    useEffect(() => {
-      const params = new URLSearchParams(window.location.search);
-      const sessionId = params.get("session_id");
-      const success = params.get("success");
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get("session_id");
+    const success = params.get("success");
+    const singleLoginRedirectUrl = params.get("singleLoginRedirectUrl");
+    if (singleLoginRedirectUrl) {
+      setRedirectUrl(singleLoginRedirectUrl);
+    }
 
-      if (success === "true" && sessionId) {
-        closePaymentModal();
-        openPaymentSuccess();
-      } else if (success === "false" || (success === "true" && !sessionId)) {
-        notifyError("There was an error processing your payment.");
-      }
-    }, []);
+    if (success === "true" && sessionId) {
+      closePaymentModal();
+      openPaymentSuccess();
+    } else if (success === "false" || (success === "true" && !sessionId)) {
+      notifyError("There was an error processing your payment.");
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
